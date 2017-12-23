@@ -71,101 +71,101 @@ bot.on('error', err => {
 /**
  * 如何发送消息
  */
-bot.on('login', () => {
-  /**
-   * 演示发送消息到文件传输助手
-   * 通常回复消息时可以用 msg.FromUserName
-   */
-  let ToUserName = 'filehelper'
+// bot.on('login', () => {
+//   /**
+//    * 演示发送消息到文件传输助手
+//    * 通常回复消息时可以用 msg.FromUserName
+//    */
+//   let ToUserName = 'filehelper'
 
-  /**
-   * 发送文本消息，可以包含emoji(😒)和QQ表情([坏笑])
-   */
-  bot.sendMsg('发送文本消息，可以包含emoji(😒)和QQ表情([坏笑])', ToUserName)
-    .catch(err => {
-      bot.emit('error', err)
-    })
+//   /**
+//    * 发送文本消息，可以包含emoji(😒)和QQ表情([坏笑])
+//    */
+//   bot.sendMsg('发送文本消息，可以包含emoji(😒)和QQ表情([坏笑])', ToUserName)
+//     .catch(err => {
+//       bot.emit('error', err)
+//     })
 
-  /**
-   * 通过表情MD5发送表情
-   */
-  bot.sendMsg({
-    emoticonMd5: '00c801cdf69127550d93ca52c3f853ff'
-  }, ToUserName)
-    .catch(err => {
-      bot.emit('error', err)
-    })
+//   /**
+//    * 通过表情MD5发送表情
+//    */
+//   bot.sendMsg({
+//     emoticonMd5: '00c801cdf69127550d93ca52c3f853ff'
+//   }, ToUserName)
+//     .catch(err => {
+//       bot.emit('error', err)
+//     })
 
-  /**
-   * 以下通过上传文件发送图片，视频，附件等
-   * 通用方法为入下
-   * file为多种类型
-   * filename必填，主要为了判断文件类型
-   */
-  // bot.sendMsg({
-  //   file: Stream || Buffer || ArrayBuffer || File || Blob,
-  //   filename: 'bot-qrcode.jpg'
-  // }, ToUserName)
-  //   .catch(err => {
-  //     bot.emit('error',err)
-  //   })
+//   /**
+//    * 以下通过上传文件发送图片，视频，附件等
+//    * 通用方法为入下
+//    * file为多种类型
+//    * filename必填，主要为了判断文件类型
+//    */
+//   // bot.sendMsg({
+//   //   file: Stream || Buffer || ArrayBuffer || File || Blob,
+//   //   filename: 'bot-qrcode.jpg'
+//   // }, ToUserName)
+//   //   .catch(err => {
+//   //     bot.emit('error',err)
+//   //   })
 
-  /**
-   * 发送图片
-   */
-  bot.sendMsg({
-    file: request('https://raw.githubusercontent.com/nodeWechat/wechat4u/master/bot-qrcode.jpg'),
-    filename: 'bot-qrcode.jpg'
-  }, ToUserName)
-    .catch(err => {
-      bot.emit('error', err)
-    })
+//   /**
+//    * 发送图片
+//    */
+//   bot.sendMsg({
+//     file: request('https://raw.githubusercontent.com/nodeWechat/wechat4u/master/bot-qrcode.jpg'),
+//     filename: 'bot-qrcode.jpg'
+//   }, ToUserName)
+//     .catch(err => {
+//       bot.emit('error', err)
+//     })
 
-  /**
-   * 发送表情
-   */
-  bot.sendMsg({
-    file: fs.createReadStream('./media/test.gif'),
-    filename: 'test.gif'
-  }, ToUserName)
-    .catch(err => {
-      bot.emit('error', err)
-    })
+//   /**
+//    * 发送表情
+//    */
+//   bot.sendMsg({
+//     file: fs.createReadStream('./media/test.gif'),
+//     filename: 'test.gif'
+//   }, ToUserName)
+//     .catch(err => {
+//       bot.emit('error', err)
+//     })
 
-  /**
-   * 发送视频
-   */
-  bot.sendMsg({
-    file: fs.createReadStream('./media/test.mp4'),
-    filename: 'test.mp4'
-  }, ToUserName)
-    .catch(err => {
-      bot.emit('error', err)
-    })
+//   /**
+//    * 发送视频
+//    */
+//   bot.sendMsg({
+//     file: fs.createReadStream('./media/test.mp4'),
+//     filename: 'test.mp4'
+//   }, ToUserName)
+//     .catch(err => {
+//       bot.emit('error', err)
+//     })
 
-  /**
-   * 发送文件
-   */
-  bot.sendMsg({
-    file: fs.createReadStream('./media/test.txt'),
-    filename: 'test.txt'
-  }, ToUserName)
-    .catch(err => {
-      bot.emit('error', err)
-    })
+//   /**
+//    * 发送文件
+//    */
+//   bot.sendMsg({
+//     file: fs.createReadStream('./media/test.txt'),
+//     filename: 'test.txt'
+//   }, ToUserName)
+//     .catch(err => {
+//       bot.emit('error', err)
+//     })
 
-  /**
-   * 发送撤回消息请求
-   */
-  bot.sendMsg('测试撤回', ToUserName)
-     .then(res => {
-       // 需要取得待撤回消息的MsgID
-       return bot.revokeMsg(res.MsgID, ToUserName)
-     })
-     .catch(err => {
-       console.log(err)
-     })
-})
+//   /**
+//    * 发送撤回消息请求
+//    */
+//   bot.sendMsg('测试撤回', ToUserName)
+//      .then(res => {
+//        // 需要取得待撤回消息的MsgID
+//        return bot.revokeMsg(res.MsgID, ToUserName)
+//      })
+//      .catch(err => {
+//        console.log(err)
+//      })
+// })
 /**
  * 如何处理会话消息
  */
@@ -187,6 +187,23 @@ bot.on('message', msg => {
        * 文本消息
        */
       console.log(msg.Content)
+      if (msg.Content == '大佬说数据') {
+
+        bot.sendMsg('正在读取大佬说数据', msg.FromUserName)
+          .catch(err => {
+            bot.emit('error', err)
+          })
+        for (let i = 1; i <= 9; i++) {
+
+          bot.sendMsg({
+            file: request('http://localhost:3000/chart' + i + '.png'),
+            filename: 'chart' + i + '.png'
+          }, msg.FromUserName)
+            .catch(err => {
+              bot.emit('error', err)
+            })
+        }
+      }
       break
     case bot.CONF.MSGTYPE_IMAGE:
       /**
